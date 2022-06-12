@@ -36,8 +36,10 @@ for num, (question, alternatives) in enumerate(QUESTIONS.items(), start=1):
     for label, alternative in labeled_alternatives.items():
         print(f" {label}) {alternative}")
     
-    answer_label = input("\nChoice? ")
-    answer = labeled_alternatives.get(answer_label)
+    while (answer_label := input("\nChoice? ")) not in labeled_alternatives:
+        print(f"Please answer one of {', '.join(labeled_alternatives)}")
+    
+    answer = labeled_alternatives[answer_label]
     if answer == correct_answer:
         num_correct += 1
         print("⭐ Correct! ⭐")
